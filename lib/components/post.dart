@@ -7,6 +7,7 @@ class SocialMediaPost extends StatefulWidget {
   final String? imageUrl;
 
   SocialMediaPost({
+    super.key,
     required this.username,
     required this.title,
     this.description,
@@ -28,7 +29,7 @@ class _SocialMediaPostState extends State<SocialMediaPost>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     );
     _animation = Tween<double>(begin: 1.0, end: 1.3).animate(
       CurvedAnimation(
@@ -57,7 +58,7 @@ class _SocialMediaPostState extends State<SocialMediaPost>
 
   String truncateDescription(String description) {
     if (description.length > 300) {
-      return description.substring(0, 300) + '...';
+      return '${description.substring(0, 300)}...';
     }
     return description;
   }
@@ -65,8 +66,8 @@ class _SocialMediaPostState extends State<SocialMediaPost>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
@@ -74,7 +75,7 @@ class _SocialMediaPostState extends State<SocialMediaPost>
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 4.0,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -87,34 +88,34 @@ class _SocialMediaPostState extends State<SocialMediaPost>
                 radius: 20.0,
                 // Replace with profile picture URL
                 backgroundImage:
-                    AssetImage('assets/images/profile_picture.png'),
+                    const AssetImage('assets/images/profile_picture.png'),
                 backgroundColor: Colors.green.shade200,
               ),
-              SizedBox(width: 8.0),
+              const SizedBox(width: 8.0),
               Text(
                 widget.username,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Text(
             widget.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18.0,
             ),
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           if (widget.description != null) ...[
             Text(
               truncateDescription(widget.description!),
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
           ],
           if (widget.imageUrl != null) ...[
             ClipRRect(
@@ -124,7 +125,7 @@ class _SocialMediaPostState extends State<SocialMediaPost>
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
           ],
           Row(
             children: [
@@ -144,16 +145,14 @@ class _SocialMediaPostState extends State<SocialMediaPost>
                   },
                 ),
               ),
-              SizedBox(width: 8.0),
               IconButton(
-                icon: Icon(Icons.comment),
+                icon: const Icon(Icons.comment),
                 onPressed: () {
                   // Comment button action
                 },
               ),
-              SizedBox(width: 8.0),
               IconButton(
-                icon: Icon(Icons.share),
+                icon: const Icon(Icons.share),
                 onPressed: () {
                   // Share button action
                 },

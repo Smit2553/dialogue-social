@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:dialogue_social/components/create_user_post.dart';
 
 class UserPost extends StatelessWidget {
-  const UserPost({ Key? key }) : super(key: key);
+  const UserPost({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('User Post Page', style: TextStyle(fontSize: 35))),
+    return Scaffold(
+      body: CreateUserPost(),
     );
   }
 }
