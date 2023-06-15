@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dialogue_social/components/post.dart';
+import 'package:dialogue_social/components/social_media_post.dart';
 
 class UserHome extends StatelessWidget {
   const UserHome({Key? key}) : super(key: key);

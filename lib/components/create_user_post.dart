@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateUserPost extends StatefulWidget {
@@ -45,8 +46,8 @@ class _CreateUserPostState extends State<CreateUserPost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: const Text(
+        title: const Center(
+          child: Text(
             'Create User Post',
             style: TextStyle(
               color: Colors.black,
@@ -64,8 +65,14 @@ class _CreateUserPostState extends State<CreateUserPost> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              maxLength: 280,
+              maxLines: 3,
+              decoration: const InputDecoration(
                 labelText: 'Title',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(),
+                ),
               ),
             ),
             SizedBox(height: 16.0),
@@ -74,8 +81,11 @@ class _CreateUserPostState extends State<CreateUserPost> {
                 controller: _descriptionController,
                 maxLines: null, // Allow unlimited lines for the description
                 expands: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
                 ),
               ),
             ),
@@ -129,7 +139,7 @@ class _CreateUserPostState extends State<CreateUserPost> {
                     ),
                     icon: Icon(Icons.check),
                     label: const Text(
-                      'Submit',
+                      'Create Post',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,

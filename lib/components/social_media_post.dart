@@ -22,7 +22,6 @@ class _SocialMediaPostState extends State<SocialMediaPost>
     with SingleTickerProviderStateMixin {
   bool isLiked = false;
   late AnimationController _animationController;
-  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -30,12 +29,6 @@ class _SocialMediaPostState extends State<SocialMediaPost>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-    );
-    _animation = Tween<double>(begin: 1.0, end: 1.3).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
     );
   }
 
@@ -101,48 +94,46 @@ class _SocialMediaPostState extends State<SocialMediaPost>
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
-          Text(
-            widget.title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18.0,
-            ),
-          ),
-          const SizedBox(height: 8.0),
-          if (widget.description != null) ...[
-            Text(
-              truncateDescription(widget.description!),
-              style: const TextStyle(fontSize: 16.0),
-            ),
-            const SizedBox(height: 8.0),
-          ],
-          if (widget.imageUrl != null) ...[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                widget.imageUrl!,
-                fit: BoxFit.cover,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
               ),
             ),
-            const SizedBox(height: 8.0),
+          ),
+          if (widget.description != null) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                truncateDescription(widget.description!),
+                style: const TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+          if (widget.imageUrl != null) ...[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  widget.imageUrl!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ],
           Row(
             children: [
-              GestureDetector(
-                onTap: toggleLike,
-                child: AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: _animation.value,
-                      child: Icon(
-                        isLiked ? Icons.favorite : Icons.favorite_border,
-                        color: isLiked ? Colors.red : Colors.grey,
-                        size: 24.0,
-                      ),
-                    );
-                  },
+              IconButton(
+                onPressed: () {
+                  toggleLike();
+                },
+                icon: Icon(
+                  isLiked ? Icons.favorite : Icons.favorite_border,
+                  color: isLiked ? Colors.red : null,
                 ),
               ),
               IconButton(
