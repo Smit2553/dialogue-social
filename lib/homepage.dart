@@ -5,6 +5,7 @@ import 'package:dialogue_social/pages/search.dart';
 import 'package:dialogue_social/pages/post.dart';
 import 'package:dialogue_social/pages/notifications.dart';
 import 'package:dialogue_social/pages/profile.dart';
+import 'package:dialogue_social/pages/chat.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,10 +24,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    const UserHome(),
+    UserHome(),
     SearchPage(),
     const UserPost(),
     const UserNotifications(),
+    const UserChat(),
     const UserProfile(),
   ];
 
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black,
             activeColor: Colors.black,
             tabBackgroundColor: Colors.green.shade100,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             tabs: const [
               GButton(
                 icon: Icons.home,
@@ -63,6 +65,10 @@ class _HomePageState extends State<HomePage> {
               GButton(
                 icon: Icons.notifications,
                 text: 'Notifications',
+              ),
+              GButton(
+                icon: Icons.chat,
+                text: 'Chat',
               ),
               GButton(
                 icon: Icons.person,
