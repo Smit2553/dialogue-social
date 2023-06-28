@@ -6,6 +6,7 @@ import 'package:dialogue_social/pages/post.dart';
 import 'package:dialogue_social/pages/notifications.dart';
 import 'package:dialogue_social/pages/profile.dart';
 import 'package:dialogue_social/pages/chat.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  int badge = 1;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -24,11 +26,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    UserHome(),
+    const UserHome(),
     SearchPage(),
     const UserPost(),
     const UserNotifications(),
-    const UserChat(),
+    UserChat(),
     const UserProfile(),
   ];
 
@@ -49,29 +51,52 @@ class _HomePageState extends State<HomePage> {
             activeColor: Colors.black,
             tabBackgroundColor: Colors.green.shade100,
             padding: const EdgeInsets.all(8),
-            tabs: const [
-              GButton(
+            tabs: [
+              const GButton(
                 icon: Icons.home,
                 text: 'Home',
               ),
-              GButton(
+              const GButton(
                 icon: Icons.search,
                 text: 'Search',
               ),
-              GButton(
+              const GButton(
                 icon: Icons.add,
                 text: 'Post',
               ),
               GButton(
                 icon: Icons.notifications,
                 text: 'Notifications',
+                leading: _currentIndex == 3 || badge == 0
+                    ? null
+                    : badges.Badge(
+                        position:
+                            badges.BadgePosition.topEnd(top: -12, end: -12),
+                        badgeStyle: badges.BadgeStyle(
+                          badgeColor: Colors.red.shade100,
+                          elevation: 0,
+                        ),
+                        badgeContent: Text(
+                          badge.toString(),
+                          style: TextStyle(color: Colors.red.shade900),
+                        ),
+                        child: Icon(
+                          Icons.notifications,
+                          color:
+                              _currentIndex == 1 ? Colors.pink : Colors.black,
+                        ),
+                      ),
               ),
-              GButton(
+              const GButton(
                 icon: Icons.chat,
                 text: 'Chat',
               ),
-              GButton(
+              const GButton(
                 icon: Icons.person,
+                leading: CircleAvatar(
+                    radius: 12,
+                    backgroundImage:
+                        AssetImage('assets/images/profile_picture.png')),
                 text: 'Profile',
               ),
             ],
