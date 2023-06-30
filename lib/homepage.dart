@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:dialogue_social/pages/home.dart';
 import 'package:dialogue_social/pages/search.dart';
-import 'package:dialogue_social/pages/post.dart';
 import 'package:dialogue_social/pages/notifications.dart';
 import 'package:dialogue_social/pages/profile.dart';
 import 'package:dialogue_social/pages/chat.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const UserHome(),
     SearchPage(),
-    const UserPost(),
     const UserNotifications(),
     UserChat(),
     const UserProfile(),
@@ -37,6 +36,28 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: SpeedDial(
+        visible: _currentIndex != 1,
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Colors.green.shade100,
+        foregroundColor: Colors.black,
+        children: [
+          _currentIndex == 3
+              ? SpeedDialChild(
+                  child: Icon(Icons.add_comment),
+                  label: 'New Chat',
+                )
+              : SpeedDialChild(
+                  child: Icon(Icons.add),
+                  label: 'New Post',
+                  onTap: () {},
+                ),
+          SpeedDialChild(
+            child: Icon(Icons.search),
+            label: 'Search',
+          ),
+        ],
+      ),
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -60,14 +81,10 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.search,
                 text: 'Search',
               ),
-              const GButton(
-                icon: Icons.add,
-                text: 'Post',
-              ),
               GButton(
                 icon: Icons.notifications,
                 text: 'Notifications',
-                leading: _currentIndex == 3 || badge == 0
+                leading: _currentIndex == 2 || badge == 0
                     ? null
                     : badges.Badge(
                         position:
@@ -83,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(
                           Icons.notifications,
                           color:
-                              _currentIndex == 1 ? Colors.pink : Colors.black,
+                              _currentIndex == 2 ? Colors.black : Colors.pink,
                         ),
                       ),
               ),

@@ -26,13 +26,23 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Recommended'),
-            Tab(text: 'Trending'),
-            Tab(text: 'News'),
+        backgroundColor: Colors.green.shade100,
+        flexibleSpace: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TabBar(
+              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              controller: _tabController,
+              tabs: const [
+                Tab(
+                  text: 'Recommended',
+                ),
+                Tab(text: 'Trending'),
+                Tab(text: 'News'),
+              ],
+              labelColor: Colors.black,
+              indicatorColor: Colors.black,
+            ),
           ],
         ),
       ),

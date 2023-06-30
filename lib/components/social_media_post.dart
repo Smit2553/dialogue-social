@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
 class SocialMediaPost extends StatefulWidget {
   final String username;
   final String title;
   final String? description;
   final String? imageUrl;
+  final bool? isVerified;
 
   SocialMediaPost({
     super.key,
@@ -12,6 +14,7 @@ class SocialMediaPost extends StatefulWidget {
     required this.title,
     this.description,
     this.imageUrl,
+    this.isVerified = false,
   });
 
   @override
@@ -92,6 +95,18 @@ class _SocialMediaPostState extends State<SocialMediaPost>
                   fontSize: 16.0,
                 ),
               ),
+              // Add a badge if the user is verified
+              if (widget.isVerified!) ...[
+                const SizedBox(width: 8.0),
+                badges.Badge(
+                  badgeContent:
+                      const Icon(Icons.check, size: 10.0, color: Colors.black),
+                  badgeStyle: badges.BadgeStyle(
+                    badgeColor: Colors.green.shade100,
+                    shape: badges.BadgeShape.instagram,
+                  ),
+                ),
+              ],
             ],
           ),
           Padding(
