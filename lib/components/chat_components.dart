@@ -82,7 +82,6 @@ class ChatBox extends StatelessWidget {
                           ),
                         ),
                         if (isVerified) ...[
-                          const SizedBox(width: 8.0),
                           badges.Badge(
                             badgeAnimation: const badges.BadgeAnimation.scale(
                               toAnimate: false,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:dialogue_social/components/social_media_post.dart';
+import 'package:dialogue_social/pages/sub_pages/recommended.dart';
+import 'package:dialogue_social/pages/sub_pages/trending.dart';
+import 'package:dialogue_social/pages/sub_pages/news.dart';
 
-class SearchPage extends StatefulWidget {
+class DiscoverPage extends StatefulWidget {
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _DiscoverPageState createState() => _DiscoverPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
+class _DiscoverPageState extends State<DiscoverPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -49,18 +51,9 @@ class _SearchPageState extends State<SearchPage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Recommended tab content
-          SocialMediaPost(
-              username: 'John Doe',
-              title: 'This is a title',
-              description: 'This is a body',
-              imageUrl: 'https://picsum.photos/200/300'),
-
-          // Trending tab content
-          Center(child: Text('Trending')),
-
-          // News tab content
-          Center(child: Text('News')),
+          RecommendedPage(), // Content for Recommended tab
+          TrendingPage(), // Content for Trending tab
+          NewsPage(), // Content for News tab
         ],
       ),
     );

@@ -7,82 +7,46 @@ class UserNotifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Notifications')),
+        appBar: AppBar(
+          title: Text('Notifications'),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+          backgroundColor: Colors.green.shade100,
+        ),
         body: ListView(
           children: const [
             NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
+              communityName: 'Tech Enthusiasts',
+              userName: 'Sarah Smith',
+              description: 'liked your post in',
+              isVerified: true,
+            ),
+            NotificationComponent(
+              communityName: 'Food Lovers',
+              userName: 'Jane Anderson',
               description: 'liked your post in',
             ),
             NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
+              communityName: 'Fitness Fanatics',
+              userName: 'Mike Johnson',
               description: 'liked your post in',
             ),
             NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
+              communityName: 'Bookworms',
+              userName: 'Emily Thompson',
               description: 'liked your post in',
             ),
             NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
+              communityName: 'Travel Explorers',
+              userName: 'Michael Johnson',
               description: 'liked your post in',
             ),
             NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
-              description: 'liked your post in',
-            ),
-            NotificationComponent(
-              communityName: 'Community Name',
-              userName: 'John Doe',
+              communityName: 'Photography Enthusiasts',
+              userName: 'Jessica Davis',
               description: 'liked your post in',
             ),
           ],

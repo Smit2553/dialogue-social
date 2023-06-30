@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:dialogue_social/pages/home.dart';
-import 'package:dialogue_social/pages/search.dart';
+import 'package:dialogue_social/pages/discover.dart';
 import 'package:dialogue_social/pages/notifications.dart';
 import 'package:dialogue_social/pages/profile.dart';
 import 'package:dialogue_social/pages/chat.dart';
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  int badge = 1;
+  int unreadNotifications = 1;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const UserHome(),
-    SearchPage(),
+    DiscoverPage(),
     const UserNotifications(),
     UserChat(),
     const UserProfile(),
@@ -37,25 +37,41 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: SpeedDial(
-        visible: _currentIndex != 1,
         animatedIcon: AnimatedIcons.menu_close,
         backgroundColor: Colors.green.shade100,
         foregroundColor: Colors.black,
         children: [
           _currentIndex == 3
               ? SpeedDialChild(
-                  child: Icon(Icons.add_comment),
+                  child: const Icon(Icons.add_comment),
                   label: 'New Chat',
                 )
               : SpeedDialChild(
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                   label: 'New Post',
                   onTap: () {},
                 ),
-          SpeedDialChild(
-            child: Icon(Icons.search),
-            label: 'Search',
-          ),
+          _currentIndex == 1
+              ? SpeedDialChild(
+                  child: const Icon(Icons.search),
+                  label: 'Search',
+                  onTap: () {},
+                )
+              : SpeedDialChild(
+                  child: const Icon(Icons.search),
+                  label: 'Search',
+                  onTap: () {},
+                ),
+          if (_currentIndex == 2)
+            SpeedDialChild(
+              child: const Icon(Icons.delete),
+              label: 'Read Notifications',
+              onTap: () {
+                setState(() {
+                  unreadNotifications = 0;
+                });
+              },
+            ),
         ],
       ),
       body: _pages[_currentIndex],
@@ -78,13 +94,13 @@ class _HomePageState extends State<HomePage> {
                 text: 'Home',
               ),
               const GButton(
-                icon: Icons.search,
-                text: 'Search',
+                icon: Icons.explore,
+                text: 'Discover',
               ),
               GButton(
                 icon: Icons.notifications,
                 text: 'Notifications',
-                leading: _currentIndex == 2 || badge == 0
+                leading: _currentIndex == 2 || unreadNotifications == 0
                     ? null
                     : badges.Badge(
                         position:
@@ -94,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                           elevation: 0,
                         ),
                         badgeContent: Text(
-                          badge.toString(),
+                          unreadNotifications.toString(),
                           style: TextStyle(color: Colors.red.shade900),
                         ),
                         child: Icon(
