@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+import 'package:dialogue_social/components/verified_badge.dart';
 
 class UserProfileCard extends StatefulWidget {
   final String username;
@@ -53,20 +53,8 @@ class _UserProfileCardState extends State<UserProfileCard> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (widget.isVerified == true) ...[
-                  const SizedBox(width: 8.0),
-                  badges.Badge(
-                    badgeAnimation: const badges.BadgeAnimation.scale(
-                      toAnimate: false,
-                    ),
-                    badgeContent: const Icon(Icons.check,
-                        size: 10.0, color: Colors.black),
-                    badgeStyle: badges.BadgeStyle(
-                      badgeColor: Colors.green.shade100,
-                      shape: badges.BadgeShape.instagram,
-                    ),
-                  ),
-                ],
+                if (widget.isVerified!)
+                  ...buildVerifiedBadge(widget.isVerified!),
               ],
             ),
 

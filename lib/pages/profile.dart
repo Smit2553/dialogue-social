@@ -7,45 +7,17 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-        backgroundColor: Colors.green.shade100,
-        titleTextStyle: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        actions: [
-          PopupMenuButton<String>(
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
-            onSelected: (value) {
-              // Handle menu item selection here
-              if (value == 'settings') {
-                // Navigate to the settings screen or perform any desired action
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                const PopupMenuItem<String>(
-                  value: 'settings',
-                  child: Text('Settings'),
-                ),
-                // Add more menu items here if needed
-              ];
-            },
+      body: ListView(
+        children: [
+          UserProfileCard(
+            username: 'John Doe',
+            profilePicture: 'assets/images/profile_picture.png',
+            followersCount: 100,
+            followingCount: 50,
+            isYourProfile: true,
+            isVerified: true,
           ),
         ],
-      ),
-      body: UserProfileCard(
-        username: 'John Doe',
-        profilePicture: 'assets/images/profile_picture.png',
-        followersCount: 100,
-        followingCount: 50,
-        isYourProfile: true,
-        isVerified: true,
       ),
     );
   }

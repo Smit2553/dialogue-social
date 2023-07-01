@@ -36,21 +36,21 @@ class NotificationComponent extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   if (isVerified == true)
-                    TextSpan(
+                    const TextSpan(
                       text: ' ',
                       children: [
                         WidgetSpan(
                           child: badges.Badge(
-                            badgeAnimation: const badges.BadgeAnimation.scale(
+                            badgeAnimation: badges.BadgeAnimation.scale(
                               toAnimate: false,
                             ),
-                            badgeContent: const Icon(
+                            badgeContent: Icon(
                               Icons.check,
                               size: 10.0,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                             badgeStyle: badges.BadgeStyle(
-                              badgeColor: Colors.green.shade100,
+                              badgeColor: Colors.green,
                               shape: badges.BadgeShape.instagram,
                             ),
                           ),

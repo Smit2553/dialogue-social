@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+import 'package:dialogue_social/components/verified_badge.dart';
 
 class ChatBox extends StatelessWidget {
   final String profilePicture;
@@ -42,6 +42,7 @@ class ChatBox extends StatelessWidget {
                   profilePicture: profilePicture,
                   username: username,
                   messages: messages,
+                  isVerified: isVerified,
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
@@ -81,19 +82,7 @@ class ChatBox extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (isVerified) ...[
-                          badges.Badge(
-                            badgeAnimation: const badges.BadgeAnimation.scale(
-                              toAnimate: false,
-                            ),
-                            badgeContent: const Icon(Icons.check,
-                                size: 10.0, color: Colors.black),
-                            badgeStyle: badges.BadgeStyle(
-                              badgeColor: Colors.green.shade100,
-                              shape: badges.BadgeShape.instagram,
-                            ),
-                          ),
-                        ],
+                        if (isVerified) ...buildVerifiedBadge(isVerified),
                       ],
                     ),
                     SizedBox(height: 4.0),
@@ -129,11 +118,13 @@ class ChatPage extends StatefulWidget {
   final String profilePicture;
   final String username;
   final List<Message> messages;
+  final bool? isVerified;
 
   ChatPage({
     required this.profilePicture,
     required this.username,
     required this.messages,
+    this.isVerified = false,
   });
 
   @override
@@ -166,6 +157,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green.shade100,
+        foregroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -179,6 +172,7 @@ class _ChatPageState extends State<ChatPage> {
             ),
             SizedBox(width: 8.0),
             Text(widget.username),
+            if (widget.isVerified!) ...buildVerifiedBadge(widget.isVerified!),
           ],
         ),
       ),
@@ -239,12 +233,12 @@ class _ChatPageState extends State<ChatPage> {
     final bgColor = isMe ? Colors.green.shade100 : Colors.grey[200];
     final align = isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
     final radius = isMe
-        ? BorderRadius.only(
+        ? const BorderRadius.only(
             topLeft: Radius.circular(12.0),
             topRight: Radius.circular(12.0),
             bottomLeft: Radius.circular(12.0),
           )
-        : BorderRadius.only(
+        : const BorderRadius.only(
             topLeft: Radius.circular(12.0),
             topRight: Radius.circular(12.0),
             bottomRight: Radius.circular(12.0),
@@ -262,19 +256,24 @@ class _ChatPageState extends State<ChatPage> {
               borderRadius: radius,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   text,
                   style: TextStyle(fontSize: 16.0),
                 ),
                 SizedBox(height: 4.0),
-                Text(
-                  timestamp,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.grey,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      timestamp,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

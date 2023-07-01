@@ -60,17 +60,32 @@ class _HomePageState extends State<HomePage> {
               : SpeedDialChild(
                   child: const Icon(Icons.search),
                   label: 'Search',
-                  onTap: () {},
+                  // go to discover page
+                  onTap: () {
+                    setState(
+                      () {
+                        _currentIndex = 1;
+                      },
+                    );
+                  },
                 ),
           if (_currentIndex == 2)
             SpeedDialChild(
               child: const Icon(Icons.delete),
               label: 'Read Notifications',
               onTap: () {
-                setState(() {
-                  unreadNotifications = 0;
-                });
+                setState(
+                  () {
+                    unreadNotifications = 0;
+                  },
+                );
               },
+            ),
+          if (_currentIndex == 4)
+            SpeedDialChild(
+              child: const Icon(Icons.settings),
+              label: 'Settings',
+              onTap: () {},
             ),
         ],
       ),

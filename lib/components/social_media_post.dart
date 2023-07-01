@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+import 'package:dialogue_social/components/verified_badge.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String username;
@@ -7,6 +7,7 @@ class SocialMediaPost extends StatefulWidget {
   final String? description;
   final String? imageUrl;
   final bool? isVerified;
+  final List<String>? tags;
 
   SocialMediaPost({
     super.key,
@@ -15,6 +16,7 @@ class SocialMediaPost extends StatefulWidget {
     this.description,
     this.imageUrl,
     this.isVerified = false,
+    this.tags,
   });
 
   @override
@@ -59,6 +61,25 @@ class _SocialMediaPostState extends State<SocialMediaPost>
     return description;
   }
 
+  List<Widget> buildTags() {
+    return widget.tags!
+        .map(
+          (tag) => Chip(
+            label: Text(
+              '#$tag',
+              style: const TextStyle(
+                color: Colors.black, // Change the color of the tag
+                fontWeight:
+                    FontWeight.bold, // Change the font weight of the tag
+              ),
+            ),
+            backgroundColor:
+                Colors.green.shade100, // Change the background color of the tag
+          ),
+        )
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,27 +109,29 @@ class _SocialMediaPostState extends State<SocialMediaPost>
                 backgroundColor: Colors.green.shade200,
               ),
               const SizedBox(width: 8.0),
-              Text(
-                widget.username,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.username,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
               ),
               // Add a badge if the user is verified
-              if (widget.isVerified!) ...[
-                const SizedBox(width: 8.0),
-                badges.Badge(
-                  badgeContent:
-                      const Icon(Icons.check, size: 10.0, color: Colors.black),
-                  badgeStyle: badges.BadgeStyle(
-                    badgeColor: Colors.green.shade100,
-                    shape: badges.BadgeShape.instagram,
-                  ),
-                ),
-              ],
+              if (widget.isVerified!) ...buildVerifiedBadge(widget.isVerified!)
             ],
           ),
+          // only display tags if there are any
+          if (widget.tags != null) ...[
+            Wrap(
+              spacing: 4.0,
+              children: buildTags(),
+            ),
+          ],
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

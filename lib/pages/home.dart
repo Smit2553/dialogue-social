@@ -13,6 +13,7 @@ class UserHome extends StatelessWidget {
         title: 'This is a title',
         description: 'This is a body',
         imageUrl: 'https://picsum.photos/200/300',
+        tags: ['tag1', 'tag2', 'tag3'],
       ),
       SocialMediaPost(
         username: 'John Doe',
