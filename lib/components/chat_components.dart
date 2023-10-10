@@ -7,7 +7,8 @@ class ChatBox extends StatelessWidget {
   final List<Message> messages;
   final bool isVerified;
 
-  ChatBox({
+  const ChatBox({
+    super.key,
     required this.profilePicture,
     required this.username,
     required this.messages,
@@ -19,14 +20,14 @@ class ChatBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
               blurRadius: 4.0,
             ),
           ],
@@ -36,7 +37,7 @@ class ChatBox extends StatelessWidget {
             Navigator.push(
               context,
               PageRouteBuilder(
-                transitionDuration: const Duration(milliseconds: 100),
+                transitionDuration: const Duration(milliseconds: 200),
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     ChatPage(
                   profilePicture: profilePicture,
@@ -68,7 +69,7 @@ class ChatBox extends StatelessWidget {
                 radius: 24.0,
                 backgroundImage: NetworkImage(profilePicture),
               ),
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +86,7 @@ class ChatBox extends StatelessWidget {
                         if (isVerified) ...buildVerifiedBadge(isVerified),
                       ],
                     ),
-                    SizedBox(height: 4.0),
+                    const SizedBox(height: 4.0),
                     Text(
                       messages.last.text,
                       style: TextStyle(
@@ -98,7 +99,7 @@ class ChatBox extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               Text(
                 messages.last.timestamp,
                 style: TextStyle(
@@ -160,7 +161,7 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.green.shade100,
         foregroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -170,7 +171,7 @@ class _ChatPageState extends State<ChatPage> {
             CircleAvatar(
               backgroundImage: NetworkImage(widget.profilePicture),
             ),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             Text(widget.username),
             if (widget.isVerified!) ...buildVerifiedBadge(widget.isVerified!),
           ],
@@ -180,7 +181,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               itemCount: widget.messages.length,
               itemBuilder: (context, index) {
                 final message = widget.messages[index];
@@ -203,7 +204,7 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: TextField(
                     controller: _textEditingController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type your message...',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(
@@ -215,7 +216,7 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 if (!_isTextFieldEmpty)
                   IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       // Send button pressed
                     },
@@ -245,12 +246,12 @@ class _ChatPageState extends State<ChatPage> {
           );
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4.0),
+      margin: const EdgeInsets.symmetric(vertical: 4.0),
       child: Column(
         crossAxisAlignment: align,
         children: [
           Container(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: radius,
@@ -260,15 +261,15 @@ class _ChatPageState extends State<ChatPage> {
               children: [
                 Text(
                   text,
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       timestamp,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12.0,
                         color: Colors.grey,
                       ),

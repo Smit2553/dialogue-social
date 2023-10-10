@@ -6,6 +6,7 @@ class NotificationComponent extends StatelessWidget {
   final String userName;
   final String description;
   final bool? isVerified;
+  final bool? isRead;
 
   const NotificationComponent({
     Key? key,
@@ -13,6 +14,7 @@ class NotificationComponent extends StatelessWidget {
     required this.userName,
     required this.description,
     this.isVerified = false,
+    this.isRead = false,
   }) : super(key: key);
 
   @override
